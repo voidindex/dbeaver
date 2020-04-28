@@ -2,7 +2,7 @@
 <feature
         id="org.jkiss.dbeaver.db.feature"
         label="%featureName"
-        version="1.0.22.qualifier"
+        version="1.0.23.qualifier"
         provider-name="%providerName">
 
     <description>
@@ -24,10 +24,13 @@
 
     <plugin id="org.jkiss.dbeaver.ext.generic" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
+    <plugin id="org.jkiss.dbeaver.ext.athena" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+    <plugin id="org.jkiss.dbeaver.ext.bigquery" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.clickhouse" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.db2.zos" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.db2.i" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.derby" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+    <plugin id="org.jkiss.dbeaver.ext.elasticsearch" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.firebird" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.greenplum" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.h2" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
@@ -41,6 +44,8 @@
     <plugin id="org.jkiss.dbeaver.ext.opendistro" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.phoenix" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.snowflake.core" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+    <plugin id="org.jkiss.dbeaver.ext.spanner" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+    <plugin id="org.jkiss.dbeaver.ext.sqlite" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.teradata" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.vertica" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
     <plugin id="org.jkiss.dbeaver.ext.ocient" download-size="0" install-size="0" version="0.0.0" unpack="false"/>

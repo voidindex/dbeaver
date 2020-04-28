@@ -9,9 +9,9 @@
     <packaging>pom</packaging>
 
     <properties>
-        <dbeaver-version>7.0.3</dbeaver-version>
+        <dbeaver-version>7.0.4</dbeaver-version>
         <dbeaver-product>DBeaver</dbeaver-product>
-        <tycho-version>1.4.0</tycho-version>
+        <tycho-version>1.7.0</tycho-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
 
@@ -118,8 +118,8 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Built-By>jkiss.org</Built-By>
-                            <Created-By>jkiss.org</Created-By>
+                            <Built-By>dbeaver.io</Built-By>
+                            <Created-By>dbeaver.io</Created-By>
                             <Build-Time>${maven.build.timestamp}</Build-Time>
                         </manifestEntries>
                         <addMavenDescriptor>false</addMavenDescriptor>

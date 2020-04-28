@@ -179,10 +179,13 @@ class ConnectionPageInitialization extends ConnectionWizardPage implements IData
                 }
             }
 
+            isolationLevel.removeAll();
+            supportedLevels.clear();
             for (DBPTransactionIsolation level : txnLevels) {
                 if (!level.isEnabled()) {
                     continue;
                 }
+
                 isolationLevel.add(level.getTitle());
                 supportedLevels.add(level);
 

@@ -271,6 +271,9 @@ public class GenericConnectionPage extends ConnectionPageWithAuth implements ICo
 
     @Override
     protected void updateDriverInfo(DBPDriver driver) {
+        if (!isCustom) {
+            site.getActiveDataSource().getConnectionConfiguration().setUrl(null);
+        }
         parseSampleURL(driver);
         saveAndUpdate();
     }
@@ -462,7 +465,6 @@ public class GenericConnectionPage extends ConnectionPageWithAuth implements ICo
         showControlGroup(GROUP_LOGIN, !driver.isAnonymousAccess());
         updateCreateButton(driver);
 
-
         settingsGroup.getParent().layout();
     }
 
@@ -488,7 +490,7 @@ public class GenericConnectionPage extends ConnectionPageWithAuth implements ICo
 
         saveSettings(testDataSource);
         DBPConnectionConfiguration cfg = testDataSource.getConnectionConfiguration();
-        cfg.setUrl(cfg.getUrl() + paramCreate);
+        cfg.setDatabaseName(cfg.getDatabaseName() + paramCreate);
         String databaseName = cfg.getDatabaseName();
         testDataSource.setName(databaseName);
 

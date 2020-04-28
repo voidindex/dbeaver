@@ -112,8 +112,12 @@ public class NewConnectionWizard extends ConnectionWizard
     @Override
     public void addPages()
     {
-        if (initialDriver == null) {
+        /*if (initialDriver == null) */{
+            // We need drivers page always as it contains some settings
             pageDrivers = new ConnectionPageDriver(this);
+            if (initialDriver != null) {
+                pageDrivers.setSelectedDriver(initialDriver);
+            }
             addPage(pageDrivers);
         }
 

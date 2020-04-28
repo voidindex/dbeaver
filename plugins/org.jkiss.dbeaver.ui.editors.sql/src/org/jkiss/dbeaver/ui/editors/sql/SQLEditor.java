@@ -394,7 +394,7 @@ public class SQLEditor extends SQLEditorBase implements
     private void initSeparateConnection(@NotNull DBPDataSource dataSource, Runnable onSuccess) {
         DBSInstance dsInstance = dataSource.getDefaultInstance();
         String[] contextDefaults = isRestoreActiveSchemaFromScript() ?
-            EditorUtils.getInputContextDefaults(getEditorInput()) : null;
+            EditorUtils.getInputContextDefaults(dataSource.getContainer(), getEditorInput()) : null;
         if (!ArrayUtils.isEmpty(contextDefaults) && contextDefaults[0] != null) {
             DBSInstance selectedInstance = DBUtils.findObject(dataSource.getAvailableInstances(), contextDefaults[0]);
             if (selectedInstance != null) {
@@ -586,7 +586,7 @@ public class SQLEditor extends SQLEditorBase implements
                 DBCExecutionContext newContext = instance.openIsolatedContext(monitor, title, instance.getDefaultContext(monitor, false));
                 // Set context defaults
                 String[] contextDefaultNames = isRestoreActiveSchemaFromScript() ?
-                    EditorUtils.getInputContextDefaults(getEditorInput()) : null;
+                    EditorUtils.getInputContextDefaults(instance.getDataSource().getContainer(), getEditorInput()) : null;
                 if (contextDefaultNames != null && contextDefaultNames.length > 1 &&
                     (!CommonUtils.isEmpty(contextDefaultNames[0]) || !CommonUtils.isEmpty(contextDefaultNames[1])))
                 {
@@ -1997,7 +1997,7 @@ public class SQLEditor extends SQLEditorBase implements
                     getSite().getShell(),
                     SQLPreferenceConstants.CONFIRM_RESULT_TABS_CLOSE,
                     ConfirmationDialog.QUESTION_WITH_CANCEL,
-                    tabsToClose.size() + 4);
+                    tabsToClose.size() + 1);
                 if (confirmResult == IDialogConstants.CANCEL_ID) {
                     return false;
                 }
@@ -2315,7 +2315,7 @@ public class SQLEditor extends SQLEditorBase implements
         if (getActivePreferenceStore().getBoolean(SQLPreferenceConstants.AUTO_SAVE_ON_CLOSE)) {
             return ISaveablePart2.YES;
         }
-        return ISaveablePart2.DEFAULT;
+        return ISaveablePart2.NO;
     }
 
     protected void afterSaveToFile(File saveFile) {
@@ -3338,13 +3338,18 @@ public class SQLEditor extends SQLEditorBase implements
         private boolean lastFocusInEditor = true;
         @Override
         public IFindReplaceTarget getTarget() {
-            CTabItem activeResultsTab = getActiveResultsTab();
-            if (activeResultsTab != null && outputViewer != null && activeResultsTab.getData() == outputViewer) {
-                return new StyledTextFindReplaceTarget(outputViewer.getText());
-            }
             ResultSetViewer rsv = getActiveResultSetViewer();
             TextViewer textViewer = getTextViewer();
             boolean focusInEditor = textViewer != null && textViewer.getTextWidget().isFocusControl();
+
+            CTabItem activeResultsTab = getActiveResultsTab();
+            if (activeResultsTab != null && activeResultsTab.getData() instanceof StyledText) {
+                StyledText styledText = (StyledText) activeResultsTab.getData();
+                if (!focusInEditor) {
+                    return new StyledTextFindReplaceTarget(styledText);
+                }
+            }
+
             if (!focusInEditor) {
                 if (rsv != null && rsv.getActivePresentation().getControl().isFocusControl()) {
                     focusInEditor = false;
